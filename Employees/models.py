@@ -36,7 +36,7 @@ class Employee(AbstractBaseUser, PermissionsMixin):
     
     employee_name = models.CharField(max_length=100)
     phonenumber = models.CharField(max_length=20,unique= True)
-    employee_id = models.CharField(unique=True, max_length=10)
+    employee_id = models.CharField(unique=True, max_length=10,primary_key=True)
     role = models.CharField(max_length=100,choices=DEPARTMENT_CHOICES)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

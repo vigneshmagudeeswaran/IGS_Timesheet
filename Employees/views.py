@@ -87,18 +87,7 @@ class EmployeeDetailView(APIView):
 #     serializer = EmployeeSerializer(user)
 #     return Response(serializer.data, status=status.HTTP_200_OK)
 
-@login_required(login_url='/login')  # Redirect to the login page if not logged in
-def employee_detail(request):
-    user = request.user
 
-    if user.role == 'Manager':
-        employees = Employee.objects.all()
-        serializer = EmployeeSerializer(employees, many=True)
-    else:
-        # If the user is not a manager, they can only see their own details
-        serializer = EmployeeSerializer(user)
-
-    return Response(serializer.data, status=status.HTTP_200_OK)
 
 class PasswordChangeView(APIView):
     permission_classes = [IsAuthenticated]
@@ -121,6 +110,7 @@ class PasswordChangeView(APIView):
                 return Response({'detail': 'Current password is incorrect.'}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class ProfileUpdateView(APIView):
     permission_classes = [IsAuthenticated]
 
