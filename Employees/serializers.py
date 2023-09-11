@@ -18,7 +18,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 class EmployeeRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ['employee_name', 'phonenumber', 'employee_id', 'role', 'password']
+        fields = ['employee_name', 'email_id', 'phonenumber', 'employee_id', 'role', 'password']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):

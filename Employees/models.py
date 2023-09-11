@@ -35,6 +35,7 @@ class Employee(AbstractBaseUser, PermissionsMixin):
         ('Marketing', 'Marketing'),]
     
     employee_name = models.CharField(max_length=100)
+    email_id = models.EmailField(blank=False, unique=True)
     phonenumber = models.CharField(max_length=20,unique= True)
     employee_id = models.CharField(unique=True, max_length=10,primary_key=True)
     role = models.CharField(max_length=100,choices=DEPARTMENT_CHOICES)
@@ -44,7 +45,7 @@ class Employee(AbstractBaseUser, PermissionsMixin):
     objects = EmployeeManager()
 
     USERNAME_FIELD = 'employee_id'
-    REQUIRED_FIELDS = ['employee_name', 'phonenumber', 'role']
+    REQUIRED_FIELDS = ['employee_name', 'phonenumber', 'role','email_id']
 
     def __str__(self):
         return self.employee_id
