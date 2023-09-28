@@ -34,18 +34,36 @@ class Employee(AbstractBaseUser, PermissionsMixin):
         ('Finance', 'Finance'),
         ('Marketing', 'Marketing'),]
     
+    DESIGNATION_CHOICES = [
+        ('Manager',"Manager"),
+        ('HR', 'HR'),
+        ('Junior SDE', 'Junior SDE'),
+        ('Senior SDE', 'Senior SDE'),
+        ('Software analyst', 'Software analyst'),
+        
+    ]
+    
     employee_name = models.CharField(max_length=100)
     email_id = models.EmailField(blank=False, unique=True)
     phonenumber = models.CharField(max_length=20,unique= True)
     employee_id = models.CharField(unique=True, max_length=10,primary_key=True)
     role = models.CharField(max_length=100,choices=DEPARTMENT_CHOICES)
+    designation = models.CharField(max_length=100,choices=DESIGNATION_CHOICES)
+    profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        editable=False
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
 
     objects = EmployeeManager()
 
     USERNAME_FIELD = 'employee_id'
-    REQUIRED_FIELDS = ['employee_name', 'phonenumber', 'role','email_id']
+    REQUIRED_FIELDS = ['employee_name', 'phonenumber', 'role','designation','email_id']
 
     def __str__(self):
         return self.employee_id

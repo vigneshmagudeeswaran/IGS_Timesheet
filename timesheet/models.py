@@ -78,7 +78,14 @@ class WeeklyTimesheet(models.Model):
     day_type3 = models.CharField(max_length=15, choices=DAY_TYPE_CHOICES, default='working')
     day_type4 = models.CharField(max_length=15, choices=DAY_TYPE_CHOICES, default='working')
     day_type5 = models.CharField(max_length=15, choices=DAY_TYPE_CHOICES, default='working')
-    
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        editable=False
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
     timesheet_id = models.CharField(max_length=20, primary_key=True, editable=False, unique=True)
     
     is_approved = models.BooleanField(default=False)
