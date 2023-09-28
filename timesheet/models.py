@@ -9,13 +9,13 @@ class Timesheet(models.Model):
     timesheet_id = models.CharField(max_length=20, primary_key=True, editable=False, unique=True)
 
     def save(self, *args, **kwargs):
-        # Generate the custom primary key: Employee_id + date (in a specific format)
+      
         self.timesheet_id = f"{self.employee.employee_id}_{self.date.strftime('%Y%m%d')}"
 
         super().save(*args, **kwargs)
     
     date = models.DateField()
-    hours_worked = models.DecimalField(max_digits=5, decimal_places=2)
+    hours_worked = models.CharField(max_length=15,blank=False)
     description = models.TextField(blank=True)
     Day_type = [
         ('working', 'Working'),
@@ -50,11 +50,11 @@ class WeeklyTimesheet(models.Model):
     date5 = models.DateField()
     
     # Hours worked for each day
-    hours_worked1 = models.DecimalField(max_digits=5, decimal_places=2)
-    hours_worked2 = models.DecimalField(max_digits=5, decimal_places=2)
-    hours_worked3 = models.DecimalField(max_digits=5, decimal_places=2)
-    hours_worked4 = models.DecimalField(max_digits=5, decimal_places=2)
-    hours_worked5 = models.DecimalField(max_digits=5, decimal_places=2)
+    hours_worked1 = models.CharField(max_length=15,blank=False)
+    hours_worked2 = models.CharField(max_length=15,blank=False)
+    hours_worked3 = models.CharField(max_length=15,blank=False)
+    hours_worked4 = models.CharField(max_length=15,blank=False)
+    hours_worked5 = models.CharField(max_length=15,blank=False)
     
     # Descriptions for each day (optional)
     description1 = models.TextField(blank=True)
@@ -102,7 +102,7 @@ class WeeklyTimesheet(models.Model):
     def save(self, *args, **kwargs):
         # Generate the custom primary key: Employee_id + date (in a specific format)
         # For this example, let's use date1 as the date for timesheet_id
-        self.timesheet_id = f"{self.employee.employee_id}_{self.date1.strftime('%Y%m%d')}"
+        self.timesheet_id = f"{self.employee.employee_id}_{self.date1.strftime('%d%m%Y')}"
         super().save(*args, **kwargs)
 
     def __str__(self):

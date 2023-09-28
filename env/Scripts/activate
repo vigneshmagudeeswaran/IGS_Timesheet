@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\MY python Class\Django\Company Projects\IGS_Timesheet\env"
+VIRTUAL_ENV="D:\Time sheet\Backend\IGS_Timesheet\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

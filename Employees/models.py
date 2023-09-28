@@ -30,7 +30,7 @@ class Employee(AbstractBaseUser, PermissionsMixin):
     DEPARTMENT_CHOICES = [
         ('Manager',"Management"),
         ('HR', 'Human Resources'),
-        ('IT', 'Information Technology'),
+        ('Information Technology', 'IT'),
         ('Finance', 'Finance'),
         ('Marketing', 'Marketing'),]
     
