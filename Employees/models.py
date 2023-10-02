@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.http import JsonResponse
 
 class EmployeeManager(BaseUserManager):
     def create_user(self, employee_id, password=None, role=None, **extra_fields):
@@ -8,7 +9,7 @@ class EmployeeManager(BaseUserManager):
         
         # Check if the role is "Manager" and set is_superuser accordingly
         is_superuser = extra_fields.pop('is_superuser', False)
-        if role == 'Manager':
+        if role == 'Management':
             is_superuser = True
         
         # Create an instance of the Employee model with the provided data
@@ -28,9 +29,9 @@ class EmployeeManager(BaseUserManager):
 class Employee(AbstractBaseUser, PermissionsMixin):
     
     DEPARTMENT_CHOICES = [
-        ('Manager',"Management"),
-        ('HR', 'Human Resources'),
-        ('Information Technology', 'IT'),
+        ('Management',"Management"),
+        ('Human Resources', 'Human Resources'),
+        ('Information Technology', 'Information Technology'),
         ('Finance', 'Finance'),
         ('Marketing', 'Marketing'),]
     
